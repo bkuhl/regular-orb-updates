@@ -45,4 +45,5 @@ USER root
 RUN apk del libmcrypt git zip unzip \
     && rm /usr/local/bin/composer
 
-CMD ['crond', '-f', '-d', '8']
+# run cron with extensive logging
+CMD ["/usr/sbin/crond", "-f", "-d", "8"]
