@@ -25,6 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(DailyUpdates::SIGNATURE)->dailyAt('9am');
+        $schedule->command(DailyUpdates::SIGNATURE)->weekdays()->at('9am');
     }
 }
