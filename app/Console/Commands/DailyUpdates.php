@@ -31,8 +31,6 @@ class DailyUpdates extends Command
      */
     public function handle()
     {
-        $mailer = app('mailer');
-
         // we've gotta have tasks
         if (count(config('updates.tasks')) == 0) {
             return app('log')->error('No update sent since there are no tasks configured');
@@ -40,28 +38,35 @@ class DailyUpdates extends Command
 
         // randomly pick one of the predefined tasks
         $task = config('updates.tasks')[array_rand(config('updates.tasks'))];
-        $body = $task['description'];
 
-        $mailer->raw($body, function ($message) use ($task) {
-            $message->to(config('updates.to'));
-            $message->subject(config('updates.subject'));
+        $ch = curl_init();
+        
+        $fields = [
+            'userEmail' => config('updates.from.email'),
+            'costCenterId' => $task['costCenter'],
+            'updateContent' => $task['description'],
+            'password' => config('updates.token')
+        ];
+        // images are optional
+        if (isset($task['image'])) {
+            $fields['image'] = curl_file_create(storage_path($task['image']));
+        }
+        curl_setopt($ch, CURLOPT_URL, config('updates.url'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
-            if (strlen(config('updates.from.email')) > 0) {
-                if (strlen(config('updates.from.name')) > 0) {
-                    $message->from(config('updates.from.email'), config('updates.from.name'));
-                } else {
-                    $message->from(config('updates.from.email'));
-                }
-            }
+        $result = curl_exec($ch);
+        $result = json_decode($result,true);
 
-            // images are optional
-            if (isset($task['image'])) {
-                $message->attach($task['image']);
-            }
-        });
+        if ($result['status']) {
+            app('log')->info('Update sent', [
+                'task' => $task
+            ]);
+        } else {
+            app('log')->error('Update error');
+        }
 
-        app('log')->info('Update sent', [
-            'task' => $task
-        ]);
     }
 }

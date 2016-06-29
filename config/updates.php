@@ -2,24 +2,25 @@
 
 return [
 
+    // security token
+    'token' => env('TOKEN'),
+
     // Send updates to this email address
-    'to' => env('UPDATE_RECIPIENT', 'projectupdate@real.place'),
+    'url' => env('URL', 'http://real.place/webhook/user-update'),
 
     // Updates are sent from
     'from' => [
-        'email' => env('UPDATE_SENDER_EMAIL', 'ben.kuhl@realpage.com'),
-        'name'  => env('UPDATE_SENDER_NAME', 'Ben Kuhl')
+        'email' => env('UPDATE_SENDER_EMAIL'),
     ],
-
-    // Updates should have this subject
-    'subject' => env('UPDATE_SUBJECT', '8728'),
 
     // Sometimes your job consists of various tasks and
     // you might want to randomly pick one for each update.
     'tasks' => [
         [
-            'description'   => "Answer Automation support & Foundation DevOps",
-            'image'         => 'storage/update-attachments/support-and-rancher.png'
+            'costCenter'    => env('COST_CENTER'),
+            'description'   => "My test task",
+            // URLs not supported, files must be locally hosted and in the storage directory
+            'image'         => 'update-attachments/support-and-rancher.png'
         ]
     ]
 

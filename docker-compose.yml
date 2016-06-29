@@ -4,7 +4,6 @@ services:
   fpm:
     build:
       context: .
-      dockerfile: infrastructure/cli/Dockerfile
     image: realpage/regular-updates:cli
     env_file: .env
     volumes:
