@@ -18,9 +18,13 @@ return [
     'tasks' => [
         [
             'costCenter'    => env('COST_CENTER'),
-            'description'   => "My test task",
-            // URLs not supported, files must be locally hosted and in the storage directory
+            'description'   => "Answer Automation Support",
             'image'         => 'update-attachments/support-and-rancher.png'
+        ],
+        [
+            'costCenter'    => env('COST_CENTER'),
+            'description'   => "AWS Maintenance and provisioning",
+            'image'         => 'update-attachments/aws-maintenance-and-provisioning.png'
         ]
     ]
 
