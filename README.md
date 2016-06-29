@@ -11,3 +11,5 @@ Use cases:
  * Fork this repo
  * [Customize the configuration](https://github.com/realpage/regular-orb-updates/blob/master/config/updates.php) to meet your needs
  * Build a docker container and deploy it
+ 
+ > For further automation, setup your repo to [automatically build](https://docs.docker.com/docker-hub/builds/) on Dockerhub
