@@ -18,13 +18,7 @@ return [
     'tasks' => [
         [
             'costCenter'    => env('COST_CENTER'),
-            'description'   => "Answer Automation Support",
-            'image'         => 'update-attachments/support-and-rancher.png'
-        ],
-        [
-            'costCenter'    => env('COST_CENTER'),
-            'description'   => "AWS Maintenance and provisioning",
-            'image'         => 'update-attachments/aws-maintenance-and-provisioning.png'
+            'description'   => "Operator & Operator SDK"
         ]
     ]
 
