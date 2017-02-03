@@ -11,14 +11,12 @@ RUN sed -ri 's/^www-data:x:82:82:/www-data:x:1001:1001:/' /etc/passwd \
 
     # fix permissions in CI
     && apk add --update --no-cache \
-        # needed for mcrypt
-        libmcrypt \
 
         # needed for composer
         git zip unzip \
 
     # php extensions the app will need
-    && docker-php-ext-install mcrypt mbstring pdo_mysql \
+    && docker-php-ext-install mbstring pdo_mysql \
 
     # install composer
     && wget -O /usr/local/bin/composer http://getcomposer.org/composer.phar \
@@ -42,7 +40,7 @@ RUN composer install --no-interaction --prefer-dist
 # as light of a container as possible
 USER root
 
-RUN apk del libmcrypt git zip unzip \
+RUN apk del git zip unzip \
     && rm /usr/local/bin/composer
 
 # run cron with extensive logging
