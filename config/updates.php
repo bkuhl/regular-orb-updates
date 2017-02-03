@@ -6,7 +6,7 @@ return [
     'token' => env('TOKEN'),
 
     // Send updates to this email address
-    'url' => env('URL', 'http://real.place/webhook/user-update'),
+    'url' => env('URL', 'https://real.place/webhook/user-update'),
 
     // Updates are sent from
     'from' => [
@@ -18,7 +18,7 @@ return [
     'tasks' => [
         [
             'costCenter'    => env('COST_CENTER'),
-            'description'   => "Operator & Operator SDK"
+            'description'   => "Answer Automation"
         ]
     ]
 
