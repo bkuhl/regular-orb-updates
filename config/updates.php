@@ -18,7 +18,11 @@ return [
     'tasks' => [
         [
             'costCenter'    => env('COST_CENTER'),
-            'description'   => "Answer Automation"
+            'description'   => "Kubernetes POC"
+        ],
+        [
+            'costCenter'    => env('COST_CENTER'),
+            'description'   => "Docker Datacenter POC"
         ]
     ]
 
