@@ -44,8 +44,7 @@ class DailyUpdates extends Command
         $fields = [
             'userEmail' => config('updates.from.email'),
             'costCenterId' => $task['costCenter'],
-            'updateContent' => $task['description'],
-            'password' => config('updates.token')
+            'updateContent' => $task['description']
         ];
         // images are optional
         if (isset($task['image'])) {
@@ -54,13 +53,15 @@ class DailyUpdates extends Command
         curl_setopt($ch, CURLOPT_URL, config('updates.url'));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, config('updates.user.name') . ":" . config('updates.user.password'));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
         $result = curl_exec($ch);
+
         $result = json_decode($result,true);
 
-        if ($result['status']) {
+        if (isset($result['status']) && $result['status'] == 1) {
             app('log')->info('Update sent', [
                 'task' => $task
             ]);
