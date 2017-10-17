@@ -2,11 +2,14 @@
 
 return [
 
-    // security token
-    'token' => env('TOKEN'),
+    // basic auth
+    'user' => [
+        'name' => env('USERNAME'),
+        'password' => env('PASSWORD')
+    ],
 
     // Send updates to this email address
-    'url' => env('URL', 'https://real.place/webhook/user-update'),
+    'url' => env('URL', 'https://real.place/api/user-update'),
 
     // Updates are sent from
     'from' => [
