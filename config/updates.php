@@ -21,11 +21,7 @@ return [
     'tasks' => [
         [
             'costCenter'    => env('COST_CENTER'),
-            'description'   => "Kubernetes POC"
-        ],
-        [
-            'costCenter'    => env('COST_CENTER'),
-            'description'   => "Docker Datacenter POC"
+            'description'   => "Container Orchestration POC"
         ]
     ]
 
